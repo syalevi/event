@@ -3,1501 +3,173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lumina Events - Platform Event & Tiket Modern</title>
+    <title>Ev-Parmad - Pendaftaran Seminar</title>
 
-    <!-- Google Fonts: Plus Jakarta Sans -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <!-- Bootstrap 5.3 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- FontAwesome 6 Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-    <!-- QRCode JS Library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-
-    <style>
-        :root {
-            --bg-base: #f3f5f9;
-            --primary-accent: #4f46e5;
-            --primary-light: #818cf8;
-            --secondary-accent: #0284c7;
-            --text-main: #0f172a;
-            --text-muted: #64748b;
-            --glass-bg: rgba(255, 255, 255, 0.75);
-            --glass-card: rgba(255, 255, 255, 0.82);
-            --glass-border: rgba(255, 255, 255, 0.9);
-            --subtle-border: rgba(226, 232, 240, 0.8);
-            --shadow-soft: 0 10px 30px -5px rgba(15, 23, 42, 0.05), 0 4px 12px -2px rgba(15, 23, 42, 0.03);
-            --shadow-hover: 0 20px 40px -8px rgba(79, 70, 229, 0.12), 0 8px 16px -4px rgba(15, 23, 42, 0.04);
-        }
-
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--bg-base);
-            color: var(--text-main);
-            overflow-x: hidden;
-            min-height: 100vh;
-            position: relative;
-        }
-
-        /* Ambient Pastel Soft Mesh Background */
-        .ambient-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -2;
-            overflow: hidden;
-            background: #f3f5f9;
-            pointer-events: none;
-        }
-
-        .pastel-orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(100px);
-            opacity: 0.6;
-            animation: floatOrb 20s infinite alternate ease-in-out;
-        }
-
-        .orb-1 {
-            top: -10%;
-            left: -5%;
-            width: 500px;
-            height: 500px;
-            background: rgba(99, 102, 241, 0.18);
-        }
-
-        .orb-2 {
-            top: 40%;
-            right: -10%;
-            width: 600px;
-            height: 600px;
-            background: rgba(56, 189, 248, 0.15);
-            animation-delay: -7s;
-        }
-
-        .orb-3 {
-            bottom: -10%;
-            left: 30%;
-            width: 550px;
-            height: 550px;
-            background: rgba(236, 72, 153, 0.12);
-            animation-delay: -12s;
-        }
-
-        @keyframes floatOrb {
-            0% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(60px, 40px) scale(1.08); }
-            100% { transform: translate(-40px, 70px) scale(0.95); }
-        }
-
-        /* Clean Glassmorphism Cards & Panels */
-        .glass-panel {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            box-shadow: var(--shadow-soft);
-            border-radius: 24px;
-        }
-
-        .glass-nav {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            box-shadow: 0 4px 20px rgba(15, 23, 42, 0.03);
-            border-radius: 100px;
-        }
-
-        .glass-card {
-            background: var(--glass-card);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            box-shadow: var(--shadow-soft);
-            border-radius: 20px;
-            transition: all 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
-        }
-
-        .glass-card:hover {
-            transform: translateY(-6px);
-            background: rgba(255, 255, 255, 0.95);
-            box-shadow: var(--shadow-hover);
-            border-color: rgba(99, 102, 241, 0.25);
-        }
-
-        /* Buttons Styling */
-        .btn-gradient-primary {
-            background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
-            color: #ffffff;
-            border: none;
-            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.25);
-            transition: all 0.3s ease;
-            font-weight: 600;
-            border-radius: 14px;
-        }
-
-        .btn-gradient-primary:hover {
-            background: linear-gradient(135deg, #4338ca 0%, #4f46e5 100%);
-            color: #ffffff;
-            box-shadow: 0 8px 25px rgba(79, 70, 229, 0.38);
-            transform: translateY(-2px);
-        }
-
-        .btn-clean-glass {
-            background: rgba(255, 255, 255, 0.8);
-            color: var(--text-main);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--subtle-border);
-            box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
-            border-radius: 14px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .btn-clean-glass:hover {
-            background: #ffffff;
-            color: var(--primary-accent);
-            border-color: rgba(99, 102, 241, 0.3);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
-        }
-
-        /* Form Controls */
-        .form-control-clean {
-            background: rgba(255, 255, 255, 0.85);
-            border: 1px solid var(--subtle-border);
-            color: var(--text-main);
-            border-radius: 14px;
-            padding: 0.75rem 1.25rem;
-            transition: all 0.3s ease;
-        }
-
-        .form-control-clean:focus {
-            background: #ffffff;
-            border-color: var(--primary-light);
-            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.12);
-            outline: none;
-        }
-
-        /* Filter Pills */
-        .filter-btn {
-            background: rgba(255, 255, 255, 0.75);
-            color: var(--text-muted);
-            border-radius: 100px;
-            padding: 0.55rem 1.3rem;
-            border: 1px solid var(--subtle-border);
-            font-size: 0.875rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .filter-btn.active, .filter-btn:hover {
-            background: var(--primary-accent);
-            color: #ffffff;
-            border-color: var(--primary-accent);
-            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
-        }
-
-        /* Category Badges */
-        .badge-clean-soft {
-            background: rgba(241, 245, 249, 0.9);
-            color: var(--text-main);
-            font-weight: 600;
-            padding: 0.4rem 0.8rem;
-            border-radius: 100px;
-            font-size: 0.75rem;
-            border: 1px solid rgba(226, 232, 240, 0.8);
-        }
-
-        .badge-selling-fast {
-            background: #fef2f2;
-            color: #ef4444;
-            border-color: #fecaca;
-        }
-
-        .badge-limited {
-            background: #fffbebfb;
-            color: #d97706;
-            border-color: #fde68a;
-        }
-
-        .badge-available {
-            background: #ecfdf5;
-            color: #059669;
-            border-color: #a7f3d0;
-        }
-
-        /* Event Image Container */
-        .event-img-container {
-            position: relative;
-            height: 200px;
-            overflow: hidden;
-            border-radius: 20px 20px 0 0;
-        }
-
-        .event-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .glass-card:hover .event-img {
-            transform: scale(1.06);
-        }
-
-        /* E-Ticket Card Layout */
-        .e-ticket-card {
-            background: #ffffff;
-            border-radius: 24px;
-            box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
-            border: 1px solid var(--subtle-border);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .e-ticket-stub {
-            border-top: 2px dashed #e2e8f0;
-            position: relative;
-        }
-
-        .e-ticket-stub::before, .e-ticket-stub::after {
-            content: '';
-            position: absolute;
-            top: -12px;
-            width: 24px;
-            height: 24px;
-            background-color: var(--bg-base);
-            border-radius: 50%;
-        }
-
-        .e-ticket-stub::before { left: -12px; }
-        .e-ticket-stub::after { right: -12px; }
-
-        /* Modal styling */
-        .modal-content.glass-modal {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid var(--glass-border);
-            box-shadow: 0 25px 60px rgba(15, 23, 42, 0.12);
-            border-radius: 28px;
-            color: var(--text-main);
-        }
-
-        /* Step Indicator Wizard */
-        .step-indicator {
-            display: flex;
-            justify-content: space-between;
-            position: relative;
-            margin-bottom: 2rem;
-        }
-
-        .step-indicator::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: #e2e8f0;
-            z-index: 1;
-            transform: translateY(-50%);
-        }
-
-        .step-item {
-            position: relative;
-            z-index: 2;
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            background: #ffffff;
-            border: 2px solid #cbd5e1;
-            color: var(--text-muted);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-        }
-
-        .step-item.active {
-            background: var(--primary-accent);
-            border-color: var(--primary-accent);
-            color: #ffffff;
-            box-shadow: 0 0 15px rgba(79, 70, 229, 0.3);
-        }
-
-        .step-item.completed {
-            background: #10b981;
-            border-color: #10b981;
-            color: #ffffff;
-        }
-
-        .offcanvas-clean {
-            background: rgba(255, 255, 255, 0.95) !important;
-            backdrop-filter: blur(25px) !important;
-            border-left: 1px solid var(--subtle-border) !important;
-            box-shadow: -10px 0 30px rgba(15, 23, 42, 0.05);
-        }
-
-        .line-clamp-2 {
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        .cursor-pointer {
-            cursor: pointer;
-        }
-
-        /* Progress Quota Bar */
-        .quota-progress {
-            height: 6px;
-            border-radius: 10px;
-            background-color: #e2e8f0;
-            overflow: hidden;
-        }
-
-        .quota-bar {
-            height: 100%;
-            border-radius: 10px;
-            background: linear-gradient(90deg, #4f46e5, #0284c7);
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #f1f5f9;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8;
-        }
-    </style>
+    <!-- Semua gaya tampilan ada di file style.css -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Ambient Background Elements -->
-    <div class="ambient-bg">
-        <div class="pastel-orb orb-1"></div>
-        <div class="pastel-orb orb-2"></div>
-        <div class="pastel-orb orb-3"></div>
-    </div>
-
-    <header class="sticky-top py-3 px-3 px-md-4">
+    <!-- ========== HEADER ========== -->
+    <header class="header">
         <div class="container">
-            <nav class="navbar navbar-expand-lg glass-nav px-3 px-md-4 py-2">
-                <a class="navbar-brand d-flex align-items-center gap-2 text-dark fw-bold fs-4 text-decoration-none" href="#">
-                    <span class="d-flex align-items-center justify-content-center rounded-3 text-white" style="background: linear-gradient(135deg, #4f46e5, #0284c7); width: 38px; height: 38px;">
-                        <i class="fa-solid fa-sparkles fs-6"></i>
-                    </span>
-                    <span>Lumina<span class="text-primary">Events</span></span>
-                </a>
-
-                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#luminaNavbar">
-                    <i class="fa-solid fa-bars fs-5 text-dark"></i>
-                </button>
-
-                <div class="collapse navbar-collapse" id="luminaNavbar">
-                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-lg-3">
-                        <li class="nav-item"><a class="nav-link text-dark fw-semibold active" href="#beranda">Beranda</a></li>
-                        <li class="nav-item"><a class="nav-link text-secondary fw-medium" href="#event-aktif">Event Aktif</a></li>
-                        <li class="nav-item"><a class="nav-link text-secondary fw-medium" href="#alur-pendaftaran">Alur Pendaftaran</a></li>
-                        <li class="nav-item"><a class="nav-link text-secondary fw-medium" href="#faq">FAQ</a></li>
-                    </ul>
-
-                    <div class="d-flex align-items-center gap-2 mt-3 mt-lg-0">
-                        <button class="btn btn-clean-glass px-3 py-2 d-flex align-items-center gap-2" data-bs-toggle="offcanvas" data-bs-target="#myTicketsOffcanvas">
-                            <i class="fa-solid fa-ticket text-primary"></i>
-                            <span>Tiket Saya</span>
-                            <span class="badge bg-primary rounded-pill ms-1" id="ticketCounterBadge">0</span>
-                        </button>
-                    </div>
-                </div>
-            </nav>
+            <h1 class="logo">Ev-<span>Parmad</span></h1>
         </div>
     </header>
 
-    <section id="beranda" class="py-5">
-        <div class="container py-3">
-            <div class="row align-items-center g-5">
-                <div class="col-lg-7">
-                    <div class="d-inline-flex align-items-center gap-2 px-3 py-2 rounded-pill mb-3" style="background: rgba(79, 70, 229, 0.08); border: 1px solid rgba(79, 70, 229, 0.15);">
-                        <span class="badge bg-primary rounded-pill px-2 py-1 small">Baru</span>
-                        <span class="small fw-semibold text-primary">E-Ticket QR Code Instant Pass 2026</span>
-                    </div>
+    <main class="container">
 
-                    <h1 class="display-4 fw-800 text-dark mb-4 lh-sm">
-                        Jelajahi Experience & Event Imersif <span style="background: linear-gradient(135deg, #4f46e5, #0284c7); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Terbaik Indonesia</span>
-                    </h1>
+        <!-- ========== INFO SEMINAR ========== -->
+        <section class="card event-info">
+            <img
+                class="event-info__image"
+                src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=80"
+                alt="Peserta mengikuti seminar di dalam ruangan">
 
-                    <p class="lead text-secondary mb-4 pe-lg-4 fs-6">
-                        Temukan berbagai pilihan konser musik, konferensi teknologi, workshop kreatif, dan festival seni. Pembelian tiket resmi aman, cepat, dan terverifikasi digital.
-                    </p>
+            <div class="event-info__body">
+                <span class="badge">Seminar Nasional</span>
+                <h2>Seminar Literasi Digital & Keamanan Siber 2026</h2>
 
-                    <!-- Interactive Search Bar -->
-                    <div class="glass-panel p-2 p-md-3 mb-4">
-                        <div class="row g-2 align-items-center">
-                            <div class="col-md-8">
-                                <div class="position-relative">
-                                    <i class="fa-solid fa-magnifying-glass position-absolute top-50 start-0 translate-middle-y ms-3 text-secondary"></i>
-                                    <input type="text" id="searchInput" class="form-control form-control-clean ps-5 py-3" placeholder="Cari event, artis, atau lokasi venue...">
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <a href="#event-aktif" class="btn btn-gradient-primary w-100 py-3 d-flex align-items-center justify-content-center gap-2">
-                                    <i class="fa-solid fa-compass"></i>
-                                    <span>Cari Event</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                <ul class="event-info__list">
+                    <li><strong>Tanggal:</strong> 28 November 2026</li>
+                    <li><strong>Waktu:</strong> 08.30 - 15.00 WIB</li>
+                    <li><strong>Lokasi:</strong> Aula Serbaguna Parmad (juga tersedia via Zoom)</li>
+                    <li><strong>Sisa kuota:</strong> <span id="sisaKuota">100</span> tiket</li>
+                </ul>
 
-                    <!-- Highlight Metrics -->
-                    <div class="d-flex flex-wrap gap-4 pt-2">
-                        <div class="d-flex align-items-center gap-3">
-                            <div class="p-3 rounded-circle bg-white shadow-sm text-primary"><i class="fa-solid fa-calendar-check fs-5"></i></div>
-                            <div>
-                                <h6 class="fw-bold text-dark mb-0">150+ Event</h6>
-                                <span class="small text-secondary">Tersedia Setiap Bulan</span>
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-center gap-3">
-                            <div class="p-3 rounded-circle bg-white shadow-sm text-success"><i class="fa-solid fa-shield-halved fs-5"></i></div>
-                            <div>
-                                <h6 class="fw-bold text-dark mb-0">100% Resmi</h6>
-                                <span class="small text-secondary">Garansi Keaslian Tiket</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <p>
+                    Seminar sehari penuh tentang cara melindungi data pribadi, mengenali penipuan
+                    online, dan memanfaatkan teknologi secara aman. Peserta mendapat e-sertifikat
+                    dan materi presentasi.
+                </p>
 
-                <div class="col-lg-5">
-                    <div class="position-relative">
-                        <div class="glass-panel p-3">
-                            <img src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=800&q=80" alt="Hero Event" class="img-fluid rounded-4 shadow-sm w-100" style="height: 380px; object-fit: cover;">
-                            <div class="p-3 mt-3 rounded-3 bg-white border border-light shadow-sm d-flex align-items-center justify-content-between">
-                                <div>
-                                    <span class="badge badge-selling-fast mb-1"><i class="fa-solid fa-fire me-1"></i> Featured Event</span>
-                                    <h6 class="fw-bold text-dark mb-0">Symphony Of Lights Festival</h6>
-                                    <small class="text-secondary"><i class="fa-solid fa-location-dot me-1 text-danger"></i> Ancol Beach, Jakarta</small>
-                                </div>
-                                <a href="#event-aktif" class="btn btn-clean-glass btn-sm px-3 py-2">Detail</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <h3>Rundown Acara</h3>
+                <ul class="event-info__list">
+                    <li><strong>08.30</strong> - Registrasi peserta</li>
+                    <li><strong>09.00</strong> - Sesi 1: Mengenali penipuan online</li>
+                    <li><strong>11.00</strong> - Sesi 2: Melindungi data pribadi</li>
+                    <li><strong>13.00</strong> - Sesi 3: Diskusi panel & tanya jawab</li>
+                </ul>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="event-aktif" class="py-5">
-        <div class="container">
-            <div class="text-center max-w-2xl mx-auto mb-4">
-                <span class="text-uppercase tracking-wider text-primary fw-bold small">Katalog Terkini</span>
-                <h2 class="display-6 fw-bold text-dark mb-2">Event Aktif Pilihan</h2>
-                <p class="text-secondary">Pilih dan dapatkan tiket resmi Anda dengan jaminan pemesanan cepat.</p>
-            </div>
+        <!-- ========== FORM PENDAFTARAN ========== -->
+        <section class="card">
+            <h2>Formulir Pendaftaran</h2>
+            <p class="muted">Isi data di bawah ini. Kolom bertanda * wajib diisi.</p>
 
-            <!-- Clean Category Filter Pills -->
-            <div class="d-flex gap-2 overflow-x-auto justify-content-md-center pb-3 mb-4" id="categoryFilters">
-                <button class="filter-btn active" data-category="all"><i class="fa-solid fa-border-all me-1"></i> Semua</button>
-                <button class="filter-btn" data-category="Konser Musik"><i class="fa-solid fa-music me-1"></i> Konser Musik</button>
-                <button class="filter-btn" data-category="Tech & Business"><i class="fa-solid fa-laptop-code me-1"></i> Tech & Business</button>
-                <button class="filter-btn" data-category="Workshop & Seminar"><i class="fa-solid fa-chalkboard-user me-1"></i> Workshop</button>
-                <button class="filter-btn" data-category="Seni & Festival"><i class="fa-solid fa-palette me-1"></i> Seni & Festival</button>
-            </div>
+            <!-- novalidate: validasi dilakukan oleh script.js agar pesan errornya bisa kita atur sendiri -->
+            <form id="formDaftar" novalidate>
 
-            <!-- Events Grid -->
-            <div class="row g-4" id="eventGrid">
-                <!-- Dynamically populated via JS -->
-            </div>
-        </div>
-    </section>
+                <!-- Nama -->
+                <div class="form-group">
+                    <label for="nama">Nama lengkap *</label>
+                    <input type="text" id="nama" name="nama" placeholder="Contoh: Anisa Rahma">
+                    <small class="error" id="errorNama"></small>
+                </div>
 
-    <section id="alur-pendaftaran" class="py-5 bg-white bg-opacity-50">
-        <div class="container py-4">
-            <div class="text-center max-w-xl mx-auto mb-5">
-                <span class="text-uppercase text-primary fw-bold small">Kemudahan Akses</span>
-                <h2 class="display-6 fw-bold text-dark">4 Langkah Mudah Pesan Tiket</h2>
-            </div>
+                <!-- Instansi -->
+                <div class="form-group">
+                    <label for="instansi">Instansi / Kampus *</label>
+                    <input type="text" id="instansi" name="instansi" placeholder="Contoh: Universitas Parmad">
+                    <small class="error" id="errorInstansi"></small>
+                </div>
 
-            <div class="row g-4">
-                <div class="col-md-6 col-lg-3">
-                    <div class="glass-card p-4 text-center h-100">
-                        <div class="d-inline-flex align-items-center justify-content-center rounded-circle bg-primary bg-opacity-10 text-primary fs-4 fw-bold mb-3" style="width: 56px; height: 56px;">
-                            1
-                        </div>
-                        <h6 class="fw-bold text-dark mb-2">Pilih Event</h6>
-                        <p class="small text-secondary mb-0">Pilih event favorit dari katalog aktif dan tentukan opsi tiket pilihan Anda.</p>
+                <!-- Email -->
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" placeholder="anisa@email.com">
+                    <small class="error" id="errorEmail"></small>
+                </div>
+
+                <!-- Nomor HP -->
+                <div class="form-group">
+                    <label for="telepon">Nomor WhatsApp *</label>
+                    <input type="tel" id="telepon" name="telepon" placeholder="081234567890">
+                    <small class="error" id="errorTelepon"></small>
+                </div>
+
+                <!-- Dua kolom: jenis tiket dan jumlah -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="jenisTiket">Jenis tiket *</label>
+                        <select id="jenisTiket" name="jenisTiket">
+                            <option value="100000">Umum (hadir langsung) - Rp 100.000</option>
+                            <option value="50000">Mahasiswa (bawa KTM) - Rp 50.000</option>
+                            <option value="25000">Online via Zoom - Rp 25.000</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="jumlah">Jumlah tiket (maks. 5) *</label>
+                        <input type="number" id="jumlah" name="jumlah" value="1" min="1" max="5">
+                        <small class="error" id="errorJumlah"></small>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="glass-card p-4 text-center h-100">
-                        <div class="d-inline-flex align-items-center justify-content-center rounded-circle bg-primary bg-opacity-10 text-primary fs-4 fw-bold mb-3" style="width: 56px; height: 56px;">
-                            2
-                        </div>
-                        <h6 class="fw-bold text-dark mb-2">Isi Data Diri</h6>
-                        <p class="small text-secondary mb-0">Lengkapi data identitas pemesan untuk validasi e-pass resmi.</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="glass-card p-4 text-center h-100">
-                        <div class="d-inline-flex align-items-center justify-content-center rounded-circle bg-primary bg-opacity-10 text-primary fs-4 fw-bold mb-3" style="width: 56px; height: 56px;">
-                            3
-                        </div>
-                        <h6 class="fw-bold text-dark mb-2">Bayar Instan</h6>
-                        <p class="small text-secondary mb-0">Gunakan metode pembayaran QRIS, Transfer Virtual Account, atau E-Wallet.</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="glass-card p-4 text-center h-100">
-                        <div class="d-inline-flex align-items-center justify-content-center rounded-circle bg-success bg-opacity-10 text-success fs-4 fw-bold mb-3" style="width: 56px; height: 56px;">
-                            4
-                        </div>
-                        <h6 class="fw-bold text-dark mb-2">Terima E-Ticket</h6>
-                        <p class="small text-secondary mb-0">E-Ticket QR Code tersimpan otomatis dan siap digunakan saat check-in.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <section id="faq" class="py-5">
-        <div class="container py-3">
-            <div class="row align-items-center g-5">
-                <div class="col-lg-5">
-                    <span class="text-primary fw-bold small text-uppercase">Bantuan & FAQ</span>
-                    <h2 class="display-6 fw-bold text-dark my-2">Pertanyaan Umum</h2>
-                    <p class="text-secondary mb-4">Punya pertanyaan seputar pembelian tiket atau E-Ticket Lumina Events? Temukan jawabannya di sini.</p>
-                    <div class="glass-panel p-4 d-flex align-items-center gap-3">
-                        <i class="fa-solid fa-headset fs-2 text-primary"></i>
-                        <div>
-                            <h6 class="fw-bold text-dark mb-1">Butuh Bantuan Lain?</h6>
-                            <small class="text-secondary">Tim Layanan Pelanggan kami siap membantu 24/7 via WhatsApp.</small>
-                        </div>
-                    </div>
+                <!-- Persetujuan -->
+                <div class="form-group form-group--checkbox">
+                    <input type="checkbox" id="setuju" name="setuju">
+                    <label for="setuju">Saya menyetujui syarat & ketentuan pendaftaran.</label>
                 </div>
-                <div class="col-lg-7">
-                    <div class="accordion accordion-flush rounded-4 overflow-hidden shadow-sm border border-light" id="faqAccordion">
-                        <div class="accordion-item bg-white">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button fw-bold text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
-                                    Bagaimana cara menunjukkan E-Ticket saat di lokasi acara?
-                                </button>
-                            </h2>
-                            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
-                                <div class="accordion-body text-secondary small">
-                                    Cukup buka menu "Tiket Saya" di bagian navigasi atas website ini atau tunjukkan file QR Code yang telah diunduh kepada petugas gate di venue.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-item bg-white">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed fw-bold text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
-                                    Apakah tiket yang sudah dibeli bisa dipindahtangankan?
-                                </button>
-                            </h2>
-                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                                <div class="accordion-body text-secondary small">
-                                    Iya, Anda dapat membagikan kode booking unik dan gambar QR Code E-Ticket kepada kerabat yang diwakilkan dengan membawa bukti salinan identitas pemesan.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-item bg-white">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed fw-bold text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
-                                    Apakah pembayaran dengan QRIS langsung terverifikasi otomatis?
-                                </button>
-                            </h2>
-                            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                                <div class="accordion-body text-secondary small">
-                                    Ya! Sistem Lumina Events menggunakan pemrosesan instan real-time sehingga E-Ticket Anda langsung terbit setelah pembayaran sukses.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+                <small class="error" id="errorSetuju"></small>
 
-    <footer class="py-5 bg-white border-top border-slate-200 mt-5">
-        <div class="container">
-            <div class="row g-4 mb-4">
-                <div class="col-lg-4">
-                    <a class="d-flex align-items-center gap-2 text-dark fw-bold fs-4 mb-3 text-decoration-none" href="#">
-                        <span class="d-flex align-items-center justify-content-center rounded-3 text-white" style="background: linear-gradient(135deg, #4f46e5, #0284c7); width: 34px; height: 34px;">
-                            <i class="fa-solid fa-sparkles fs-6"></i>
-                        </span>
-                        Lumina Events
-                    </a>
-                    <p class="text-secondary small mb-3">Platform penyelenggara event dan penjualan tiket terpercaya di Indonesia dengan teknologi QR digital pass terintegrasi.</p>
-                    <div class="d-flex gap-2">
-                        <a href="#" class="btn btn-clean-glass p-2 rounded-circle" style="width: 38px; height: 38px;"><i class="fa-brands fa-instagram text-secondary"></i></a>
-                        <a href="#" class="btn btn-clean-glass p-2 rounded-circle" style="width: 38px; height: 38px;"><i class="fa-brands fa-x-twitter text-secondary"></i></a>
-                        <a href="#" class="btn btn-clean-glass p-2 rounded-circle" style="width: 38px; height: 38px;"><i class="fa-brands fa-linkedin-in text-secondary"></i></a>
+                <!-- Ringkasan biaya (diisi otomatis oleh script.js) -->
+                <div class="summary">
+                    <div class="summary__row">
+                        <span>Harga tiket x <span id="ringkasJumlah">1</span></span>
+                        <span id="ringkasSubtotal">Rp 0</span>
+                    </div>
+                    <div class="summary__row">
+                        <span>Biaya admin</span>
+                        <span id="ringkasAdmin">Rp 5.000</span>
+                    </div>
+                    <div class="summary__row summary__row--total">
+                        <span>Total</span>
+                        <span id="ringkasTotal">Rp 0</span>
                     </div>
                 </div>
-                <div class="col-6 col-lg-2">
-                    <h6 class="fw-bold text-dark mb-3">Navigasi</h6>
-                    <ul class="list-unstyled text-secondary small d-flex flex-column gap-2">
-                        <li><a href="#beranda" class="text-secondary text-decoration-none">Beranda</a></li>
-                        <li><a href="#event-aktif" class="text-secondary text-decoration-none">Event Aktif</a></li>
-                        <li><a href="#alur-pendaftaran" class="text-secondary text-decoration-none">Alur Pendaftaran</a></li>
-                        <li><a href="#faq" class="text-secondary text-decoration-none">FAQ</a></li>
-                    </ul>
-                </div>
-                <div class="col-6 col-lg-2">
-                    <h6 class="fw-bold text-dark mb-3">Kategori</h6>
-                    <ul class="list-unstyled text-secondary small d-flex flex-column gap-2">
-                        <li><a href="#event-aktif" class="text-secondary text-decoration-none">Konser Musik</a></li>
-                        <li><a href="#event-aktif" class="text-secondary text-decoration-none">Tech Summit</a></li>
-                        <li><a href="#event-aktif" class="text-secondary text-decoration-none">Creative Workshop</a></li>
-                        <li><a href="#event-aktif" class="text-secondary text-decoration-none">Seni & Festival</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-4">
-                    <h6 class="fw-bold text-dark mb-3">Kontak Penyelenggara</h6>
-                    <p class="text-secondary small mb-2"><i class="fa-regular fa-envelope me-2 text-primary"></i> hello@luminaevents.id</p>
-                    <p class="text-secondary small mb-2"><i class="fa-brands fa-whatsapp me-2 text-success"></i> +62 811-2233-4455</p>
-                    <p class="text-secondary small"><i class="fa-solid fa-location-dot me-2 text-danger"></i> Lumina Tower Lt. 12, Jakarta Selatan</p>
-                </div>
+
+                <button type="submit" class="btn">Daftar Sekarang</button>
+            </form>
+
+            <!-- Pesan sukses (disembunyikan sampai pendaftaran berhasil) -->
+            <div id="pesanSukses" class="alert alert--success hidden"></div>
+        </section>
+
+        <!-- ========== DAFTAR PENDAFTAR ========== -->
+        <section class="card">
+            <div class="card__header">
+                <h2>Daftar Peserta</h2>
+                <button type="button" class="btn btn--small btn--outline" id="tombolHapus">Hapus semua</button>
             </div>
-            <div class="text-center pt-3 border-top border-light text-secondary small">
-                © 2026 Lumina Events Organizer. All rights reserved. Clean Glassmorphism UI.
+
+            <p class="muted" id="pesanKosong">Belum ada peserta terdaftar.</p>
+
+            <div class="table-wrapper">
+                <table id="tabelPendaftar" class="hidden">
+                    <thead>
+                        <tr>
+                            <th>Kode</th>
+                            <th>Nama</th>
+                            <th>Instansi</th>
+                            <th>Tiket</th>
+                            <th>Jumlah</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="isiTabel"></tbody>
+                </table>
             </div>
-        </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 Ev-Parmad. Contoh latihan form pendaftaran dengan HTML, CSS, dan JavaScript.</p>
     </footer>
 
-
-    <!-- Event Detail Modal -->
-    <div class="modal fade" id="eventDetailModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content glass-modal overflow-hidden">
-                <div class="position-relative">
-                    <img id="modalEventImg" src="" class="w-100" style="height: 280px; object-fit: cover;" alt="Event Banner">
-                    <button type="button" class="btn-close position-absolute top-0 end-0 m-3 p-2 bg-white rounded-circle shadow-sm" data-bs-dismiss="modal" aria-label="Close"></button>
-                    <div class="position-absolute bottom-0 start-0 p-4 w-100" style="background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.8) 60%, transparent 100%);">
-                        <span id="modalEventCategory" class="badge bg-primary rounded-pill mb-2">Category</span>
-                        <h3 id="modalEventTitle" class="fw-bold text-dark mb-0">Event Title</h3>
-                    </div>
-                </div>
-                <div class="modal-body p-4 pt-2">
-                    <div class="row g-4 mb-3">
-                        <div class="col-md-7">
-                            <h6 class="fw-bold text-dark mb-2"><i class="fa-solid fa-align-left text-primary me-2"></i>Deskripsi Acara</h6>
-                            <p id="modalEventDesc" class="text-secondary small mb-4">Deskripsi acara...</p>
-
-                            <h6 class="fw-bold text-dark mb-2"><i class="fa-solid fa-timeline text-primary me-2"></i>Jadwal Rundown</h6>
-                            <div class="ps-3 border-start border-2 border-primary border-opacity-50 text-secondary small mb-4">
-                                <div class="mb-2"><strong class="text-dark">15:00 WIB</strong> - Open Gate Check-in & Registrasi</div>
-                                <div class="mb-2"><strong class="text-dark">16:30 WIB</strong> - Opening Ceremony & Performance</div>
-                                <div><strong class="text-dark">19:00 WIB</strong> - Main Session / Keynote Event</div>
-                            </div>
-
-                            <h6 class="fw-bold text-dark mb-2"><i class="fa-solid fa-users text-primary me-2"></i>Guest Stars / Pembicara</h6>
-                            <div id="modalGuestStars" class="d-flex gap-2 flex-wrap text-secondary small">
-                                <!-- Populated dynamically -->
-                            </div>
-                        </div>
-
-                        <div class="col-md-5">
-                            <div class="p-3 rounded-4 bg-white border border-light shadow-sm">
-                                <h6 class="fw-bold text-dark mb-3">Informasi Pelaksanaan</h6>
-                                <div class="d-flex align-items-center gap-3 mb-3 text-secondary small">
-                                    <i class="fa-regular fa-calendar-days text-primary fs-5"></i>
-                                    <div>
-                                        <div class="text-dark fw-semibold">Tanggal & Waktu</div>
-                                        <span id="modalEventDate">Date</span>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-center gap-3 mb-3 text-secondary small">
-                                    <i class="fa-solid fa-location-dot text-danger fs-5"></i>
-                                    <div>
-                                        <div class="text-dark fw-semibold">Lokasi Venue</div>
-                                        <span id="modalEventLocation">Location</span>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-center gap-3 mb-3 text-secondary small">
-                                    <i class="fa-solid fa-ticket text-warning fs-5"></i>
-                                    <div>
-                                        <div class="text-dark fw-semibold">Harga Tiket</div>
-                                        <span id="modalEventPrice" class="text-primary fw-bold fs-6">Rp 0</span>
-                                    </div>
-                                </div>
-                                <hr class="my-3">
-                                <button id="btnOpenRegisterModal" class="btn btn-gradient-primary w-100 py-3 d-flex align-items-center justify-content-center gap-2">
-                                    <i class="fa-solid fa-ticket"></i>
-                                    <span>Beli / Pesan Tiket</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Booking Multi-Step Wizard Modal -->
-    <div class="modal fade" id="registerModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content glass-modal p-4">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <div>
-                        <h4 class="fw-bold text-dark mb-0">Pendaftaran Tiket</h4>
-                        <span id="regEventTitle" class="small text-primary fw-semibold">Event Title</span>
-                    </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-
-                <!-- Wizard Steps Indicator -->
-                <div class="step-indicator">
-                    <div class="step-item active" id="stepIndicator1">1</div>
-                    <div class="step-item" id="stepIndicator2">2</div>
-                    <div class="step-item" id="stepIndicator3">3</div>
-                </div>
-
-                <form id="registrationForm" onsubmit="event.preventDefault();">
-                    <!-- Step 1: Kategori Tiket & Jumlah -->
-                    <div class="wizard-step" id="step1">
-                        <h6 class="fw-bold text-dark mb-3"><i class="fa-solid fa-ticket me-2 text-primary"></i>Langkah 1: Pilih Kategori Tiket</h6>
-                        
-                        <div class="mb-3">
-                            <label class="form-label text-secondary small">Kategori Tiket Available</label>
-                            <div class="d-flex flex-column gap-2" id="ticketTierContainer">
-                                <!-- Populated dynamically -->
-                            </div>
-                        </div>
-
-                        <div class="row align-items-center g-3 my-2 p-3 rounded-3 bg-white border border-light">
-                            <div class="col-6">
-                                <span class="text-dark fw-semibold">Jumlah Tiket</span>
-                                <div class="small text-secondary">Maksimal 5 tiket per pesanan</div>
-                            </div>
-                            <div class="col-6 d-flex justify-content-end align-items-center gap-2">
-                                <button type="button" class="btn btn-clean-glass px-3 py-1" onclick="changeQuantity(-1)">-</button>
-                                <span id="ticketQty" class="fw-bold text-dark fs-5 px-3">1</span>
-                                <button type="button" class="btn btn-clean-glass px-3 py-1" onclick="changeQuantity(1)">+</button>
-                            </div>
-                        </div>
-
-                        <div class="d-flex justify-content-end mt-4">
-                            <button type="button" class="btn btn-gradient-primary px-4 py-2" onclick="goToStep(2)">Lanjut: Data Pemesan <i class="fa-solid fa-arrow-right ms-1"></i></button>
-                        </div>
-                    </div>
-
-                    <!-- Step 2: Data Diri Pemesan -->
-                    <div class="wizard-step d-none" id="step2">
-                        <h6 class="fw-bold text-dark mb-3"><i class="fa-solid fa-user me-2 text-primary"></i>Langkah 2: Informasi Pemesan</h6>
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <label class="form-label text-secondary small">Nama Lengkap (Sesuai KTP/Identitas)</label>
-                                <input type="text" class="form-control form-control-clean" id="regName" placeholder="Contoh: Anisa Rahma" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label text-secondary small">Alamat Email (Pengiriman E-Ticket)</label>
-                                <input type="email" class="form-control form-control-clean" id="regEmail" placeholder="anisa@email.com" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label text-secondary small">Nomor WhatsApp</label>
-                                <input type="tel" class="form-control form-control-clean" id="regPhone" placeholder="081234567890" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label text-secondary small">Nomor Identitas (NIK KTP / SIM)</label>
-                                <input type="text" class="form-control form-control-clean" id="regNik" placeholder="3171002233440001" required>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-between mt-4">
-                            <button type="button" class="btn btn-clean-glass px-4 py-2" onclick="goToStep(1)"><i class="fa-solid fa-arrow-left me-1"></i> Kembali</button>
-                            <button type="button" class="btn btn-gradient-primary px-4 py-2" onclick="goToStep(3)">Lanjut: Pembayaran <i class="fa-solid fa-arrow-right ms-1"></i></button>
-                        </div>
-                    </div>
-
-                    <!-- Step 3: Pembayaran & Ringkasan -->
-                    <div class="wizard-step d-none" id="step3">
-                        <h6 class="fw-bold text-dark mb-3"><i class="fa-solid fa-credit-card me-2 text-primary"></i>Langkah 3: Ringkasan & Pembayaran</h6>
-
-                        <div class="p-3 rounded-3 bg-white border border-light mb-3">
-                            <div class="d-flex justify-content-between text-secondary small mb-1">
-                                <span>Harga Tiket x <span id="summaryQty">1</span></span>
-                                <span id="summarySubtotal">Rp 0</span>
-                            </div>
-                            <div class="d-flex justify-content-between text-secondary small mb-2">
-                                <span>Biaya Layanan Admin</span>
-                                <span>Rp 5.000</span>
-                            </div>
-                            <hr class="my-2">
-                            <div class="d-flex justify-content-between text-dark fw-bold fs-5">
-                                <span>Total Tagihan</span>
-                                <span id="summaryTotal" class="text-primary">Rp 0</span>
-                            </div>
-                        </div>
-
-                        <label class="form-label text-secondary small">Pilih Metode Pembayaran</label>
-                        <div class="row g-2 mb-3">
-                            <div class="col-md-4">
-                                <div class="payment-method-card p-3 rounded-3 text-center cursor-pointer border border-primary active-payment bg-white shadow-sm" onclick="selectPayment('QRIS', this)">
-                                    <i class="fa-solid fa-qrcode fs-3 text-primary mb-2"></i>
-                                    <div class="fw-bold text-dark small">QRIS Instant</div>
-                                    <div class="text-secondary" style="font-size: 0.725rem;">GoPay, OVO, Dana, Shopee</div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="payment-method-card p-3 rounded-3 text-center cursor-pointer border border-light bg-white" onclick="selectPayment('Virtual Account', this)">
-                                    <i class="fa-solid fa-building-columns fs-3 text-warning mb-2"></i>
-                                    <div class="fw-bold text-dark small">Virtual Account</div>
-                                    <div class="text-secondary" style="font-size: 0.725rem;">BCA, Mandiri, BRI, BNI</div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="payment-method-card p-3 rounded-3 text-center cursor-pointer border border-light bg-white" onclick="selectPayment('E-Wallet Direct', this)">
-                                    <i class="fa-solid fa-wallet fs-3 text-success mb-2"></i>
-                                    <div class="fw-bold text-dark small">E-Wallet Direct</div>
-                                    <div class="text-secondary" style="font-size: 0.725rem;">GoPay & ShopeePay</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-check my-3 text-secondary small">
-                            <input class="form-check-input" type="checkbox" id="termsCheck" required checked>
-                            <label class="form-check-label" for="termsCheck">
-                                Saya menyetujui Syarat & Ketentuan pendaftaran serta kebijakan privasi Lumina Events.
-                            </label>
-                        </div>
-
-                        <div class="d-flex justify-content-between mt-4">
-                            <button type="button" class="btn btn-clean-glass px-4 py-2" onclick="goToStep(2)"><i class="fa-solid fa-arrow-left me-1"></i> Kembali</button>
-                            <button type="button" class="btn btn-gradient-primary px-4 py-3 fw-bold" onclick="processRegistration()">
-                                <i class="fa-solid fa-lock me-2"></i> Bayar & Terbitkan Tiket
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- Digital E-Ticket Pass Modal -->
-    <div class="modal fade" id="eTicketPassModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-md modal-dialog-centered">
-            <div class="modal-content glass-modal p-4 border-0">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <span class="badge bg-success rounded-pill px-3 py-2"><i class="fa-solid fa-circle-check me-1"></i> Pembayaran Berhasil</span>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-
-                <!-- Digital E-Ticket Pass Card -->
-                <div class="e-ticket-card p-4 my-2" id="printableTicket">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <div class="d-flex align-items-center gap-2">
-                            <span class="d-flex align-items-center justify-content-center rounded-3 text-white" style="background: linear-gradient(135deg, #4f46e5, #0284c7); width: 28px; height: 28px;">
-                                <i class="fa-solid fa-sparkles" style="font-size: 0.75rem;"></i>
-                            </span>
-                            <span class="fw-bold text-dark small">LUMINA DIGITAL PASS</span>
-                        </div>
-                        <span id="ticketTierBadge" class="badge bg-primary">VIP Pass</span>
-                    </div>
-
-                    <h4 id="ticketEventName" class="fw-bold text-dark mb-2">Symphony Of Lights Festival</h4>
-                    <p id="ticketEventMeta" class="small text-secondary mb-3"><i class="fa-regular fa-calendar me-1"></i> 18 Nov 2026 • Ancol Beach, Jakarta</p>
-
-                    <div class="row g-2 text-secondary small mb-3 p-3 rounded-3 bg-light">
-                        <div class="col-6">
-                            <span class="d-block text-secondary" style="font-size: 0.7rem;">NAMA PEMEGANG</span>
-                            <strong id="ticketHolderName" class="text-dark">Anisa Rahma</strong>
-                        </div>
-                        <div class="col-6">
-                            <span class="d-block text-secondary" style="font-size: 0.7rem;">KODE BOOKING</span>
-                            <strong id="ticketCodeDisplay" class="text-primary">EVT-2026-X892</strong>
-                        </div>
-                    </div>
-
-                    <!-- E-Ticket Stub Area -->
-                    <div class="e-ticket-stub pt-4 mt-3 text-center">
-                        <div class="d-flex justify-content-center mb-2">
-                            <div id="qrcode" class="p-2 bg-white rounded-3 border border-light"></div>
-                        </div>
-                        <div class="small text-secondary mt-1">Scan QR Code ini pada pintu masuk gate venue acara.</div>
-                    </div>
-                </div>
-
-                <div class="d-flex flex-column gap-2 mt-3">
-                    <button class="btn btn-gradient-primary w-100 py-2 d-flex align-items-center justify-content-center gap-2" onclick="printTicket()">
-                        <i class="fa-solid fa-print"></i>
-                        <span>Cetak / Simpan PDF</span>
-                    </button>
-                    <button class="btn btn-clean-glass w-100 py-2 d-flex align-items-center justify-content-center gap-2" onclick="copyBookingCode()">
-                        <i class="fa-regular fa-copy"></i>
-                        <span>Salin Kode Booking</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Tiket Saya Offcanvas Drawer -->
-    <div class="offcanvas offcanvas-end offcanvas-clean" tabindex="-1" id="myTicketsOffcanvas" aria-labelledby="myTicketsLabel">
-        <div class="offcanvas-header border-bottom border-light">
-            <h5 class="offcanvas-title text-dark fw-bold d-flex align-items-center gap-2" id="myTicketsLabel">
-                <i class="fa-solid fa-ticket text-primary"></i> Tiket Saya
-            </h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            <div id="myTicketsContainer" class="d-flex flex-column gap-3">
-                <!-- Stored tickets dynamically injected -->
-            </div>
-        </div>
-    </div>
-
-    <!-- Toast Notification Container -->
-    <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1090;">
-        <div id="luminaToast" class="toast glass-panel text-dark border-0 shadow-lg" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header bg-transparent text-dark border-0">
-                <i class="fa-solid fa-circle-info text-primary me-2" id="toastIcon"></i>
-                <strong class="me-auto" id="toastTitle">Notifikasi Lumina</strong>
-                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-            <div class="toast-body pt-0 text-secondary" id="toastMessage">
-                Pesan tidak tersedia.
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // Active Events Data Array
-        const activeEventsData = [
-            {
-                id: 'evt-1',
-                title: 'Symphony Of Lights Festival 2026',
-                category: 'Konser Musik',
-                date: '18 - 19 November 2026',
-                location: 'Ancol Beach Park, Jakarta',
-                price: 350000,
-                status: 'Selling Fast',
-                totalQuota: 100,
-                remainingSlots: 18,
-                image: 'https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=800&q=80',
-                description: 'Nikmati konser orchestra & musik populer terbesar dengan latar pemandangan pantai dan instalasi panggung efek pencahayaan lampu visual yang megah.',
-                guestStars: ['Isyana Sarasvati', 'Tulus', 'Juicy Luicy', 'Dipha Barus'],
-                tiers: [
-                    { name: 'Early Bird Regular', price: 250000 },
-                    { name: 'Festival General', price: 350000 },
-                    { name: 'VIP Frontstage Pass', price: 650000 }
-                ]
-            },
-            {
-                id: 'evt-2',
-                title: 'Indonesia Future Tech Summit',
-                category: 'Tech & Business',
-                date: '02 Desember 2026',
-                location: 'Convention Center, BSD City',
-                price: 200000,
-                status: 'Terbatas',
-                totalQuota: 80,
-                remainingSlots: 9,
-                image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=80',
-                description: 'Konferensi tahunan bertaraf internasional yang menghadirkan para eksekutif industri teknologi, AI innovator, serta pendiri startup sukses.',
-                guestStars: ['CTO Unicorn Tech', 'Head of AI SEA', 'Founder Venture Capital'],
-                tiers: [
-                    { name: 'Standard Delegate', price: 200000 },
-                    { name: 'VIP Networking Pass', price: 500000 }
-                ]
-            },
-            {
-                id: 'evt-3',
-                title: 'AI Product Design & UI Workshop',
-                category: 'Workshop & Seminar',
-                date: '12 Desember 2026',
-                location: 'Co-Working Studio, Bandung',
-                price: 125000,
-                status: 'Tersedia',
-                totalQuota: 50,
-                remainingSlots: 32,
-                image: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80',
-                description: 'Sesi workshop intensif hands-on mempelajari integrasi generative AI dalam riset user experience, wireframing, dan prototyping interaktif modern.',
-                guestStars: ['Lead Product Designer', 'Senior UX Researcher'],
-                tiers: [
-                    { name: 'Online Streaming Pass', price: 75000 },
-                    { name: 'On-Site Intensive Pass', price: 125000 }
-                ]
-            },
-            {
-                id: 'evt-4',
-                title: 'Nusantara Contemporary Art Expo',
-                category: 'Seni & Festival',
-                date: '20 - 22 Desember 2026',
-                location: 'Galeri Nasional, Jakarta',
-                price: 60000,
-                status: 'Tersedia',
-                totalQuota: 150,
-                remainingSlots: 85,
-                image: 'https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?auto=format&fit=crop&w=800&q=80',
-                description: 'Eksibisi karya seni kontemporer gabungan dari 30 seniman visual Indonesia, pameran instalasi lukisan, lukisan digital, dan NFT art gallery.',
-                guestStars: ['Heru Prasetyo', 'Raden Art Collective'],
-                tiers: [
-                    { name: 'Single Entry Pass', price: 60000 },
-                    { name: 'All-Day Pass + Art Catalog', price: 120000 }
-                ]
-            },
-            {
-                id: 'evt-5',
-                title: 'Bali Sunset Acoustic Festival',
-                category: 'Konser Musik',
-                date: '15 Januari 2027',
-                location: 'Nusa Dua Beach Resort, Bali',
-                price: 275000,
-                status: 'Selling Fast',
-                totalQuota: 120,
-                remainingSlots: 15,
-                image: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=800&q=80',
-                description: 'Suasana musik akustik santai tepi pantai dengan penampilan artis solo kenamaan, bazaar kuliner, dan pertunjukan tarian Bali.',
-                guestStars: ['Fourtwnty', 'Pamungkas', 'Maka Music'],
-                tiers: [
-                    { name: 'Presale Festival Pass', price: 200000 },
-                    { name: 'Regular Festival Pass', price: 275000 }
-                ]
-            },
-            {
-                id: 'evt-6',
-                title: 'Growth Marketing Leadership Class',
-                category: 'Workshop & Seminar',
-                date: '25 Januari 2027',
-                location: 'Grand Hotel Ballroom, Surabaya',
-                price: 350000,
-                status: 'Terbatas',
-                totalQuota: 40,
-                remainingSlots: 6,
-                image: 'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=800&q=80',
-                description: 'Strategi komprehensif memimpin tim marketing, mengoptimalkan budget campaign, dan eksekusi strategi Omnichannel Sales untuk bisnis.',
-                guestStars: ['VP Marketing Shopee', 'Ex-CMO Tech Unicorn'],
-                tiers: [
-                    { name: 'Masterclass Executive Pass', price: 350000 }
-                ]
-            }
-        ];
-
-        // Global Application State
-        let currentSelectedEvent = null;
-        let currentSelectedTier = null;
-        let currentQty = 1;
-        let selectedPaymentMethod = 'QRIS';
-        let myTickets = JSON.parse(localStorage.getItem('lumina_my_tickets') || '[]');
-
-        function formatRupiah(amount) {
-            return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(amount);
-        }
-
-        function renderEventCards(eventsToRender) {
-            const container = document.getElementById('eventGrid');
-            container.innerHTML = '';
-
-            if (eventsToRender.length === 0) {
-                container.innerHTML = `
-                    <div class="col-12 text-center py-5">
-                        <div class="glass-panel p-5 d-inline-block max-w-md">
-                            <i class="fa-solid fa-calendar-xmark text-secondary fs-1 mb-3"></i>
-                            <h5 class="text-dark fw-bold">Event Tidak Ditemukan</h5>
-                            <p class="text-secondary small mb-0">Silakan ubah kata kunci pencarian atau kategori filter Anda.</p>
-                        </div>
-                    </div>
-                `;
-                return;
-            }
-
-            eventsToRender.forEach(evt => {
-                let badgeClass = 'badge-available';
-                if (evt.status === 'Selling Fast') badgeClass = 'badge-selling-fast';
-                if (evt.status === 'Terbatas') badgeClass = 'badge-limited';
-
-                const percentLeft = Math.round((evt.remainingSlots / evt.totalQuota) * 100);
-
-                const cardHtml = `
-                    <div class="col-md-6 col-lg-4">
-                        <div class="glass-card h-100 d-flex flex-column">
-                            <div class="event-img-container">
-                                <img src="${evt.image}" class="event-img" alt="${evt.title}">
-                                <div class="position-absolute top-0 start-0 p-3">
-                                    <span class="badge badge-clean-soft">${evt.category}</span>
-                                </div>
-                                <div class="position-absolute top-0 end-0 p-3">
-                                    <span class="badge ${badgeClass}">${evt.status}</span>
-                                </div>
-                            </div>
-                            <div class="p-4 d-flex flex-column flex-grow-1">
-                                <div class="d-flex align-items-center gap-2 text-primary small fw-semibold mb-1">
-                                    <i class="fa-regular fa-calendar"></i>
-                                    <span>${evt.date}</span>
-                                </div>
-                                <h5 class="fw-bold text-dark mb-2 line-clamp-2">${evt.title}</h5>
-                                <p class="text-secondary small mb-3 flex-grow-1"><i class="fa-solid fa-location-dot me-1 text-danger"></i> ${evt.location}</p>
-
-                                <!-- Quota Progress Bar -->
-                                <div class="mb-3">
-                                    <div class="d-flex justify-content-between align-items-center small mb-1">
-                                        <span class="text-secondary" style="font-size: 0.75rem;">Sisa Kuota Tiket</span>
-                                        <span class="fw-bold text-dark" style="font-size: 0.75rem;">${evt.remainingSlots} Tiket Tersisa</span>
-                                    </div>
-                                    <div class="quota-progress">
-                                        <div class="quota-bar" style="width: ${percentLeft}%;"></div>
-                                    </div>
-                                </div>
-
-                                <div class="pt-3 border-top border-light d-flex align-items-center justify-content-between mt-auto">
-                                    <div>
-                                        <span class="d-block text-secondary" style="font-size: 0.725rem;">Mulai dari</span>
-                                        <span class="fw-bold text-dark fs-6">${formatRupiah(evt.price)}</span>
-                                    </div>
-                                    <div class="d-flex gap-2">
-                                        <button class="btn btn-clean-glass btn-sm px-3 py-2" onclick="openEventDetail('${evt.id}')">Detail</button>
-                                        <button class="btn btn-gradient-primary btn-sm px-3 py-2" onclick="openBookingWizardDirect('${evt.id}')">Pesan</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `;
-                container.insertAdjacentHTML('beforeend', cardHtml);
-            });
-        }
-
-        function openEventDetail(eventId) {
-            currentSelectedEvent = activeEventsData.find(e => e.id === eventId);
-            if (!currentSelectedEvent) return;
-
-            document.getElementById('modalEventImg').src = currentSelectedEvent.image;
-            document.getElementById('modalEventCategory').textContent = currentSelectedEvent.category;
-            document.getElementById('modalEventTitle').textContent = currentSelectedEvent.title;
-            document.getElementById('modalEventDesc').textContent = currentSelectedEvent.description;
-            document.getElementById('modalEventDate').textContent = currentSelectedEvent.date;
-            document.getElementById('modalEventLocation').textContent = currentSelectedEvent.location;
-            document.getElementById('modalEventPrice').textContent = formatRupiah(currentSelectedEvent.price);
-
-            const starsContainer = document.getElementById('modalGuestStars');
-            starsContainer.innerHTML = '';
-            currentSelectedEvent.guestStars.forEach(star => {
-                starsContainer.innerHTML += `<span class="badge bg-light text-dark rounded-pill px-3 py-2 border border-light"><i class="fa-solid fa-star text-warning me-1"></i> ${star}</span>`;
-            });
-
-            document.getElementById('btnOpenRegisterModal').onclick = function() {
-                const detailModal = bootstrap.Modal.getInstance(document.getElementById('eventDetailModal'));
-                if (detailModal) detailModal.hide();
-                openRegistrationModal();
-            };
-
-            const modal = new bootstrap.Modal(document.getElementById('eventDetailModal'));
-            modal.show();
-        }
-
-        function openBookingWizardDirect(eventId) {
-            currentSelectedEvent = activeEventsData.find(e => e.id === eventId);
-            if (currentSelectedEvent) openRegistrationModal();
-        }
-
-        function openRegistrationModal() {
-            if (!currentSelectedEvent) return;
-
-            document.getElementById('regEventTitle').textContent = currentSelectedEvent.title;
-
-            // Render ticket tiers
-            const tierContainer = document.getElementById('ticketTierContainer');
-            tierContainer.innerHTML = '';
-            currentSelectedEvent.tiers.forEach((tier, index) => {
-                const isChecked = index === 0 ? 'checked' : '';
-                if (index === 0) currentSelectedTier = tier;
-
-                const tierHtml = `
-                    <label class="d-flex justify-content-between align-items-center p-3 rounded-3 cursor-pointer text-dark bg-white border border-light shadow-sm">
-                        <div class="d-flex align-items-center gap-3">
-                            <input class="form-check-input mt-0" type="radio" name="ticketTier" value="${index}" ${isChecked} onchange="selectTier(${index})">
-                            <span class="fw-semibold">${tier.name}</span>
-                        </div>
-                        <span class="text-primary fw-bold">${formatRupiah(tier.price)}</span>
-                    </label>
-                `;
-                tierContainer.insertAdjacentHTML('beforeend', tierHtml);
-            });
-
-            currentQty = 1;
-            updateCalculationSummary();
-            goToStep(1);
-
-            const regModal = new bootstrap.Modal(document.getElementById('registerModal'));
-            regModal.show();
-        }
-
-        function selectTier(index) {
-            currentSelectedTier = currentSelectedEvent.tiers[index];
-            updateCalculationSummary();
-        }
-
-        function changeQuantity(delta) {
-            currentQty = Math.max(1, Math.min(5, currentQty + delta));
-            document.getElementById('ticketQty').textContent = currentQty;
-            updateCalculationSummary();
-        }
-
-        function updateCalculationSummary() {
-            if (!currentSelectedTier) return;
-            const subtotal = currentSelectedTier.price * currentQty;
-            const adminFee = 5000;
-            const grandTotal = subtotal + adminFee;
-
-            document.getElementById('summaryQty').textContent = currentQty;
-            document.getElementById('summarySubtotal').textContent = formatRupiah(subtotal);
-            document.getElementById('summaryTotal').textContent = formatRupiah(grandTotal);
-        }
-
-        function goToStep(stepNumber) {
-            // Validation before moving to step 3
-            if (stepNumber === 3) {
-                const name = document.getElementById('regName').value.trim();
-                const email = document.getElementById('regEmail').value.trim();
-                const phone = document.getElementById('regPhone').value.trim();
-                if (!name || !email || !phone) {
-                    showToast('Harap lengkapi Nama, Email, dan No. HP terlebih dahulu!', 'warning');
-                    return;
-                }
-            }
-
-            document.querySelectorAll('.wizard-step').forEach(el => el.classList.add('d-none'));
-            document.getElementById(`step${stepNumber}`).classList.remove('d-none');
-
-            for (let i = 1; i <= 3; i++) {
-                const ind = document.getElementById(`stepIndicator${i}`);
-                if (i < stepNumber) {
-                    ind.className = 'step-item completed';
-                    ind.innerHTML = '<i class="fa-solid fa-check"></i>';
-                } else if (i === stepNumber) {
-                    ind.className = 'step-item active';
-                    ind.textContent = i;
-                } else {
-                    ind.className = 'step-item';
-                    ind.textContent = i;
-                }
-            }
-        }
-
-        function selectPayment(method, element) {
-            selectedPaymentMethod = method;
-            document.querySelectorAll('.payment-method-card').forEach(el => {
-                el.classList.remove('border-primary', 'shadow-sm');
-                el.classList.add('border-light');
-            });
-            element.classList.remove('border-light');
-            element.classList.add('border-primary', 'shadow-sm');
-        }
-
-        function processRegistration() {
-            const name = document.getElementById('regName').value.trim();
-            const email = document.getElementById('regEmail').value.trim();
-            const bookingCode = 'EVT-2026-' + Math.random().toString(36).substring(2, 7).toUpperCase();
-
-            const ticketObject = {
-                id: bookingCode,
-                eventName: currentSelectedEvent.title,
-                eventDate: currentSelectedEvent.date,
-                eventLocation: currentSelectedEvent.location,
-                holderName: name,
-                holderEmail: email,
-                tierName: currentSelectedTier.name,
-                qty: currentQty,
-                totalPaid: formatRupiah((currentSelectedTier.price * currentQty) + 5000),
-                paymentMethod: selectedPaymentMethod,
-                timestamp: new Date().toLocaleDateString('id-ID')
-            };
-
-            // Save to local storage
-            myTickets.unshift(ticketObject);
-            localStorage.setItem('lumina_my_tickets', JSON.stringify(myTickets));
-            updateTicketBadgeCounter();
-            renderMyTicketsOffcanvas();
-
-            // Hide registration modal
-            const regModal = bootstrap.Modal.getInstance(document.getElementById('registerModal'));
-            if (regModal) regModal.hide();
-
-            // Populate E-Ticket Modal
-            document.getElementById('ticketTierBadge').textContent = currentSelectedTier.name;
-            document.getElementById('ticketEventName').textContent = currentSelectedEvent.title;
-            document.getElementById('ticketEventMeta').innerHTML = `<i class="fa-regular fa-calendar me-1"></i> ${currentSelectedEvent.date} • ${currentSelectedEvent.location}`;
-            document.getElementById('ticketHolderName').textContent = name;
-            document.getElementById('ticketCodeDisplay').textContent = bookingCode;
-
-            // Generate QRCode
-            const qrContainer = document.getElementById('qrcode');
-            qrContainer.innerHTML = '';
-            new QRCode(qrContainer, {
-                text: `LUMINA-VALIDATED:${bookingCode}:${name}`,
-                width: 125,
-                height: 125,
-                colorDark: "#0f172a",
-                colorLight: "#ffffff",
-                correctLevel: QRCode.CorrectLevel.H
-            });
-
-            // Show E-Ticket modal
-            const ticketModal = new bootstrap.Modal(document.getElementById('eTicketPassModal'));
-            ticketModal.show();
-
-            showToast('Pendaftaran Berhasil! E-Ticket Anda tersimpan otomatis.', 'success');
-        }
-
-        function copyBookingCode() {
-            const code = document.getElementById('ticketCodeDisplay').textContent;
-            navigator.clipboard.writeText(code).then(() => {
-                showToast(`Kode booking ${code} berhasil disalin!`, 'success');
-            }).catch(() => {
-                showToast('Gagal menyalin kode.', 'danger');
-            });
-        }
-
-        function printTicket() {
-            window.print();
-        }
-
-        function updateTicketBadgeCounter() {
-            document.getElementById('ticketCounterBadge').textContent = myTickets.length;
-        }
-
-        function renderMyTicketsOffcanvas() {
-            const container = document.getElementById('myTicketsContainer');
-            container.innerHTML = '';
-
-            if (myTickets.length === 0) {
-                container.innerHTML = `
-                    <div class="text-center py-5 text-secondary">
-                        <i class="fa-solid fa-ticket-simple fs-1 mb-3 text-slate-300"></i>
-                        <p class="small mb-0">Belum ada tiket terdaftar.</p>
-                    </div>
-                `;
-                return;
-            }
-
-            myTickets.forEach(t => {
-                const itemHtml = `
-                    <div class="p-3 rounded-4 glass-card border border-light">
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <span class="badge bg-primary rounded-pill" style="font-size: 0.7rem;">${t.tierName}</span>
-                            <span class="text-primary fw-bold small">${t.id}</span>
-                        </div>
-                        <h6 class="fw-bold text-dark mb-1 line-clamp-2">${t.eventName}</h6>
-                        <div class="small text-secondary mb-2"><i class="fa-regular fa-calendar me-1"></i>${t.eventDate}</div>
-                        <div class="small text-secondary mb-3"><i class="fa-solid fa-user me-1"></i>${t.holderName} (${t.qty} Tiket)</div>
-
-                        <button class="btn btn-clean-glass btn-sm w-100" onclick="reopenTicketModal('${t.id}')">
-                            <i class="fa-solid fa-qrcode me-1"></i> Tampilkan QR E-Pass
-                        </button>
-                    </div>
-                `;
-                container.insertAdjacentHTML('beforeend', itemHtml);
-            });
-        }
-
-        function reopenTicketModal(ticketId) {
-            const t = myTickets.find(item => item.id === ticketId);
-            if (!t) return;
-
-            document.getElementById('ticketTierBadge').textContent = t.tierName;
-            document.getElementById('ticketEventName').textContent = t.eventName;
-            document.getElementById('ticketEventMeta').innerHTML = `<i class="fa-regular fa-calendar me-1"></i> ${t.eventDate} • ${t.eventLocation}`;
-            document.getElementById('ticketHolderName').textContent = t.holderName;
-            document.getElementById('ticketCodeDisplay').textContent = t.id;
-
-            const qrContainer = document.getElementById('qrcode');
-            qrContainer.innerHTML = '';
-            new QRCode(qrContainer, {
-                text: `LUMINA-VALIDATED:${t.id}:${t.holderName}`,
-                width: 125,
-                height: 125,
-                colorDark: "#0f172a",
-                colorLight: "#ffffff",
-                correctLevel: QRCode.CorrectLevel.H
-            });
-
-            // Hide offcanvas
-            const offcanvasEl = document.getElementById('myTicketsOffcanvas');
-            const bsOffcanvas = bootstrap.Offcanvas.getInstance(offcanvasEl);
-            if (bsOffcanvas) bsOffcanvas.hide();
-
-            const ticketModal = new bootstrap.Modal(document.getElementById('eTicketPassModal'));
-            ticketModal.show();
-        }
-
-        function showToast(message, type = 'info') {
-            const toastEl = document.getElementById('luminaToast');
-            const messageEl = document.getElementById('toastMessage');
-            const iconEl = document.getElementById('toastIcon');
-
-            messageEl.textContent = message;
-
-            if (type === 'success') {
-                iconEl.className = 'fa-solid fa-circle-check text-success me-2';
-            } else if (type === 'warning') {
-                iconEl.className = 'fa-solid fa-triangle-exclamation text-warning me-2';
-            } else if (type === 'danger') {
-                iconEl.className = 'fa-solid fa-circle-xmark text-danger me-2';
-            } else {
-                iconEl.className = 'fa-solid fa-circle-info text-primary me-2';
-            }
-
-            const toast = new bootstrap.Toast(toastEl, { delay: 4000 });
-            toast.show();
-        }
-
-        // Initialize on DOM Ready
-        document.addEventListener('DOMContentLoaded', function() {
-            renderEventCards(activeEventsData);
-            updateTicketBadgeCounter();
-            renderMyTicketsOffcanvas();
-
-            // Search Filter
-            const searchInput = document.getElementById('searchInput');
-            searchInput.addEventListener('input', function(e) {
-                const query = e.target.value.toLowerCase();
-                const filtered = activeEventsData.filter(evt =>
-                    evt.title.toLowerCase().includes(query) ||
-                    evt.location.toLowerCase().includes(query) ||
-                    evt.category.toLowerCase().includes(query)
-                );
-                renderEventCards(filtered);
-            });
-
-            // Category Filter Buttons
-            const filterBtns = document.querySelectorAll('.filter-btn');
-            filterBtns.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    filterBtns.forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-
-                    const cat = this.getAttribute('data-category');
-                    if (cat === 'all') {
-                        renderEventCards(activeEventsData);
-                    } else {
-                        const filtered = activeEventsData.filter(evt => evt.category === cat);
-                        renderEventCards(filtered);
-                    }
-                });
-            });
-        });
-    </script>
+    <!-- Logika form ada di file script.js -->
+    <script src="script.js"></script>
 </body>
 </html>
