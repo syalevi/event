@@ -1,0 +1,318 @@
+/* =========================================================
+   style.css - Gaya tampilan form pendaftaran event
+   Urutan file:
+   1. Variabel warna & pengaturan dasar
+   2. Layout (container, header, footer)
+   3. Komponen (card, form, tombol, tabel, dll.)
+   4. Responsif (layar kecil)
+   ========================================================= */
+
+
+/* ---------- 1. VARIABEL & PENGATURAN DASAR ---------- */
+
+/* Variabel CSS: ubah warna di sini, seluruh halaman ikut berubah */
+:root {
+    --warna-utama: #4f46e5;
+    --warna-utama-gelap: #4338ca;
+    --warna-latar: #f3f5f9;
+    --warna-kartu: #ffffff;
+    --warna-teks: #0f172a;
+    --warna-teks-redup: #64748b;
+    --warna-garis: #e2e8f0;
+    --warna-error: #dc2626;
+    --warna-sukses: #059669;
+    --radius: 12px;
+}
+
+/* Reset sederhana: ukuran elemen sudah termasuk padding dan border */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6;
+    background: var(--warna-latar);
+    color: var(--warna-teks);
+}
+
+h1, h2 {
+    margin: 0 0 8px;
+}
+
+
+/* ---------- 2. LAYOUT ---------- */
+
+/* Container: membatasi lebar konten dan menengahkannya */
+.container {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+.header {
+    background: var(--warna-kartu);
+    border-bottom: 1px solid var(--warna-garis);
+    padding: 16px 0;
+}
+
+.logo {
+    font-size: 1.4rem;
+    margin: 0;
+}
+
+.logo span {
+    color: var(--warna-utama);
+}
+
+main.container {
+    padding-top: 24px;
+    padding-bottom: 24px;
+}
+
+.footer {
+    text-align: center;
+    padding: 24px 16px;
+    color: var(--warna-teks-redup);
+    font-size: 0.875rem;
+}
+
+
+/* ---------- 3. KOMPONEN ---------- */
+
+/* Card: kotak putih tempat setiap bagian halaman */
+.card {
+    background: var(--warna-kartu);
+    border: 1px solid var(--warna-garis);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 24px;
+}
+
+.card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.muted {
+    color: var(--warna-teks-redup);
+    margin-top: 0;
+}
+
+/* Badge kategori */
+.badge {
+    display: inline-block;
+    background: #eef2ff;
+    color: var(--warna-utama);
+    font-size: 0.8rem;
+    font-weight: bold;
+    padding: 2px 12px;
+    border-radius: 999px;
+    margin-bottom: 8px;
+}
+
+/* --- Info event --- */
+.event-info {
+    padding: 0;
+    overflow: hidden; /* agar gambar ikut melengkung di sudut card */
+}
+
+.event-info__image {
+    display: block;
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.event-info__body {
+    padding: 24px;
+}
+
+.event-info__list {
+    list-style: none;
+    padding: 0;
+    margin: 12px 0;
+}
+
+/* --- Form --- */
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
+select {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 1rem;
+    border: 1px solid var(--warna-garis);
+    border-radius: 8px;
+    background: #ffffff;
+}
+
+/* Efek saat kolom sedang diisi */
+input:focus,
+select:focus {
+    outline: none;
+    border-color: var(--warna-utama);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
+/* Kolom yang salah diberi border merah (class ditambahkan oleh script.js) */
+.input-error {
+    border-color: var(--warna-error);
+}
+
+.error {
+    display: block;
+    color: var(--warna-error);
+    font-size: 0.85rem;
+    min-height: 1.2em; /* tinggi tetap supaya tampilan tidak "melompat" */
+}
+
+/* Dua kolom bersebelahan */
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+/* Checkbox sejajar dengan labelnya */
+.form-group--checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 0;
+}
+
+.form-group--checkbox label {
+    margin: 0;
+    font-weight: normal;
+}
+
+/* --- Ringkasan biaya --- */
+.summary {
+    background: var(--warna-latar);
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px 0;
+}
+
+.summary__row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4px;
+}
+
+.summary__row--total {
+    border-top: 1px solid var(--warna-garis);
+    margin: 8px 0 0;
+    padding-top: 8px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: var(--warna-utama);
+}
+
+/* --- Tombol --- */
+.btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ffffff;
+    background: var(--warna-utama);
+    border: 2px solid var(--warna-utama);
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: var(--warna-utama-gelap);
+    border-color: var(--warna-utama-gelap);
+}
+
+.btn--small {
+    width: auto;
+    padding: 6px 12px;
+    font-size: 0.85rem;
+}
+
+.btn--outline {
+    background: transparent;
+    color: var(--warna-utama);
+}
+
+.btn--outline:hover {
+    background: var(--warna-utama);
+    color: #ffffff;
+}
+
+/* --- Pesan sukses --- */
+.alert {
+    margin-top: 16px;
+    padding: 12px 16px;
+    border-radius: 8px;
+}
+
+.alert--success {
+    background: #ecfdf5;
+    color: var(--warna-sukses);
+    border: 1px solid #a7f3d0;
+}
+
+/* --- Tabel --- */
+.table-wrapper {
+    overflow-x: auto; /* tabel bisa digeser di layar kecil */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid var(--warna-garis);
+    font-size: 0.9rem;
+}
+
+th {
+    background: var(--warna-latar);
+}
+
+/* Kelas bantu untuk menyembunyikan elemen */
+.hidden {
+    display: none;
+}
+
+
+/* ---------- 4. RESPONSIF ---------- */
+
+/* Di layar selebar 600px atau kurang, form dua kolom jadi satu kolom */
+@media (max-width: 600px) {
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .card {
+        padding: 16px;
+    }
+
+    .event-info__body {
+        padding: 16px;
+    }
+}
